@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:10.23-alpine
+    image: nexus.countigo.org:5000/postgres:10.23-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-rickmorty}
       POSTGRES_USER: ${POSTGRES_USER:-rickmorty}
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   neo4j:
-    image: neo4j:4.4.44-community
+    image: nexus.countigo.org:5000/neo4j:4.4.44-community
     environment:
       NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-rickmortygraph}
       NEO4J_dbms_memory_heap_initial__size: 256m
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.0.1
+    image: nexus.countigo.org:5000/confluentinc/cp-zookeeper:5.0.1
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -47,7 +47,7 @@ services:
     restart: unless-stopped
 
   kafka:
-    image: confluentinc/cp-kafka:5.0.1
+    image: nexus.countigo.org:5000/confluentinc/cp-kafka:5.0.1
     depends_on:
       zookeeper:
         condition: service_healthy
