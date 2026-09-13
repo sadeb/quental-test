@@ -1,4 +1,4 @@
-FROM maven:3.9.11-eclipse-temurin-11 AS build
+FROM nexus.countigo.org:5000/maven:3.9.11-eclipse-temurin-11 AS build
 WORKDIR /workspace
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
@@ -7,7 +7,7 @@ COPY src src
 # RUN ./mvnw -B -DskipTests package
 RUN ./mvnw -B package
 
-FROM eclipse-temurin:11-jre-jammy
+FROM nexus.countigo.org:5000/eclipse-temurin:11-jre-jammy
 RUN apt-get update \
     && apt-get install --no-install-recommends -y curl \
     && rm -rf /var/lib/apt/lists/* \
